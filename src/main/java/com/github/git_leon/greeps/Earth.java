@@ -1,7 +1,10 @@
 package com.github.git_leon.greeps;
 
 import com.github.git_leon.jfoot.system.resources.JFootImage;
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
+import greenfoot.Color;
+import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
+import greenfoot.World;
 
 
 /**

@@ -1,6 +1,7 @@
 package com.github.git_leon.greeps;
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
+import greenfoot.Actor;
+import greenfoot.Greenfoot;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.github.git_leon.greeps;
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
+import greenfoot.Actor;
 
 /**
  * A space ship. It comes from space, lands, and releases some Greeps into the world.

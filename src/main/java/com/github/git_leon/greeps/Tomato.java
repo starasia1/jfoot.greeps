@@ -1,19 +1,18 @@
 package com.github.git_leon.greeps;
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
+import greenfoot.Actor;
+import greenfoot.Color;
+import greenfoot.GreenfootImage;
 
-
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
  * A pile of tomatoes.
- * 
+ *
  * @author Michael Kolling
  * @version 1.0.1
  */
-public class Tomato extends Actor
-{
+public class Tomato extends Actor {
     private static Random randomizer = new Random();
 
     private static final int SIZE = 30;
@@ -27,8 +26,7 @@ public class Tomato extends Actor
     /**
      * Create a pile of a given number of tomatoes.
      */
-    public Tomato(int tomatoes)
-    {
+    public Tomato(int tomatoes) {
         this.tomatoes = tomatoes;
         updateImage();
     }
@@ -37,13 +35,11 @@ public class Tomato extends Actor
      * Remove a tomato from this pile. (If it was the last one, this pile will
      * disappear from the world.)
      */
-    public void takeOne()
-    {
+    public void takeOne() {
         tomatoes = tomatoes - 1;
         if (tomatoes <= 0) {
             getWorld().removeObject(this);
-        }
-        else {
+        } else {
             updateImage();
         }
     }
@@ -51,9 +47,8 @@ public class Tomato extends Actor
     /**
      * Update the image to show the current number of tomatoes.
      */
-    private void updateImage()
-    {
-        GreenfootImage image = new GreenfootImage(SIZE+3, SIZE+3);
+    private void updateImage() {
+        GreenfootImage image = new GreenfootImage(SIZE + 3, SIZE + 3);
 
         for (int i = 0; i < tomatoes; i++) {
             drawTomato(image, randomCoord(), randomCoord());
@@ -64,8 +59,7 @@ public class Tomato extends Actor
     /**
      * Draw a single tomato onthe the given image at the position specified.
      */
-    private void drawTomato(GreenfootImage image, int x, int y)
-    {
+    private void drawTomato(GreenfootImage image, int x, int y) {
         image.setColorAt(x + 1, y, color1);
         image.setColorAt(x, y + 1, color1);
         image.setColorAt(x, y + 2, color2);
@@ -79,12 +73,11 @@ public class Tomato extends Actor
         image.setColorAt(x + 3, y + 1, color3);
         image.setColorAt(x + 3, y + 2, color3);
     }
-    
+
     /**
      * Generate a random number relative to the size of the food pile.
      */
-    private int randomCoord()
-    {
+    private int randomCoord() {
         int val = HALFSIZE + (int) (randomizer.nextGaussian() * (HALFSIZE / 2));
         if (val < 0)
             return 0;
