@@ -22,7 +22,7 @@ public class DemoAppTest {
             Long totalSimulationTime = (numberOfRounds * durationOfRoundsInMilliseconds) + timeToEvaluateResultsInMilliseconds;
             new JFootApplication().run();
             Greenfoot.setWorld(new Earth());
-            Greenfoot.setSpeed(50);
+            Greenfoot.setSpeed(simulationSpeed);
             WorldHandler.getInstance().getWorld();
             Thread.sleep(totalSimulationTime);
         } catch (Throwable e) {
