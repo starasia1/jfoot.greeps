@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Michael Kolling
  * @version 1.0.1
  */
-public class TomatoPile extends Actor
+public class Tomato extends Actor
 {
     private static Random randomizer = new Random();
 
@@ -27,7 +27,7 @@ public class TomatoPile extends Actor
     /**
      * Create a pile of a given number of tomatoes.
      */
-    public TomatoPile(int tomatoes)
+    public Tomato(int tomatoes)
     {
         this.tomatoes = tomatoes;
         updateImage();

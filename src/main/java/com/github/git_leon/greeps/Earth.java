@@ -19,7 +19,7 @@ public class Earth extends World {
     public static final int SCORE_DISPLAY_TIME = 240;
 
     private GreenfootImage map;
-    private Ship ship;
+    private Spaceship ship;
     private int currentMap;
 
     private int[][][] mapData = {
@@ -78,10 +78,10 @@ public class Earth extends World {
         int[][] thisMap = mapData[mapNo];
         for (int i = 1; i < thisMap.length; i++) {
             int[] data = thisMap[i];
-            addObject(new TomatoPile(data[0]), data[1], data[2]);
+            addObject(new Tomato(data[0]), data[1], data[2]);
         }
         int[] shipData = thisMap[0];
-        ship = new Ship(shipData[0]);
+        ship = new Spaceship(shipData[0]);
         addObject(ship, shipData[1], shipData[2]);
     }
 

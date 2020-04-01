@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
  * @author Michael Kolling
  * @version 1.0
  */
-public class Ship extends Actor {
+public class Spaceship extends Actor {
 
     private int totalPassengers = 20;     // Total number of passengers in this ship.
     private int passengersReleased = 0;   // Number of passengers that left so far.
@@ -20,7 +20,7 @@ public class Ship extends Actor {
     /**
      * Create a space ship. The parameter specifies at what height to land.
      */
-    public Ship(int position) {
+    public Spaceship(int position) {
         targetPosition = position;
         setImage(new StringBuilder()
                 .append(System.getProperty("user.dir"))

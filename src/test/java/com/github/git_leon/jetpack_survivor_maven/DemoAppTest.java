@@ -9,12 +9,22 @@ import org.junit.Test;
 public class DemoAppTest {
     @Test
     public void test() {
+        test(3, 12000L);
+    }
+
+    private void test(Integer numberOfRounds, Long durationOfRoundsInMilliseconds) {
+        test(numberOfRounds, durationOfRoundsInMilliseconds, 50);
+    }
+
+    private void test(Integer numberOfRounds, Long durationOfRoundsInMilliseconds, Integer simulationSpeed) {
         try {
+            Long timeToEvaluateResultsInMilliseconds = 1500L;
+            Long totalSimulationTime = (numberOfRounds * durationOfRoundsInMilliseconds) + timeToEvaluateResultsInMilliseconds;
             new JFootApplication().run();
             Greenfoot.setWorld(new Earth());
-            Greenfoot.setSpeed(75);
+            Greenfoot.setSpeed(50);
             WorldHandler.getInstance().getWorld();
-            Thread.sleep(99999);
+            Thread.sleep(totalSimulationTime);
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }

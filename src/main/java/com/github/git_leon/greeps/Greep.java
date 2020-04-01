@@ -1,8 +1,5 @@
 package com.github.git_leon.greeps;
 
-import com.github.git_leon.jfoot.system.resources.JFootImage;
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
-
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
  *
@@ -24,7 +21,7 @@ public class Greep extends Creature {
     /**
      * Create a Greep with its home space ship.
      */
-    public Greep(Ship ship) {
+    public Greep(Spaceship ship) {
         super(ship);
         setImage(new StringBuilder()
                 .append(System.getProperty("user.dir"))
@@ -57,7 +54,7 @@ public class Greep extends Creature {
      */
     public void checkFood() {
         // check whether there's a tomato pile here
-        TomatoPile tomatoes = (TomatoPile) getOneIntersectingObject(TomatoPile.class);
+        Tomato tomatoes = (Tomato) getOneIntersectingObject(Tomato.class);
         if (tomatoes != null) {
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't

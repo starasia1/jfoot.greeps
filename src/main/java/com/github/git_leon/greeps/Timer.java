@@ -1,7 +1,5 @@
 package com.github.git_leon.greeps;
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
-
 /**
  * A timer is a conter that automatically counts up as time goes on.
  * This timer also checks whether the map has been completed (either time
@@ -59,7 +57,7 @@ public class Timer extends Counter
      */
     private boolean allTomatoesGone()
     {
-        return getWorld().getObjects(TomatoPile.class).isEmpty();
+        return getWorld().getObjects(Tomato.class).isEmpty();
     }
     
     /**
