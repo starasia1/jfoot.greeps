@@ -24,38 +24,14 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
-<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Greep.java
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
             } else {
                 turnTowardsHome();
-                move();
             }
-=======
-        // random chance of turning
-        turnRandomly();
-
-        // always drop tomatoes at ship
-        if (isAtShip()) {
-            turnAwayFrom(getShip(), 15);
-            dropTomato();
         }
-
-        // always avoid obstacles
-        if (isAtWorldEdge() || isAtWater() || !canMove()) {
-            turnRandomDegrees();
-        }
-
-        if (isWaitingForAssistance() || isWaitingToAssist()) {
-            waitForTomatoLoadingAssistance();
-        } else if (isCarryingTomato()) {
-            returnToShip();
->>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Greep.java
-        } else {
-            move();
-            checkFood();
-        }
+        move();
     }
 
     public Boolean isWaitingForAssistance() {

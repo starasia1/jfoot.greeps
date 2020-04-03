@@ -96,13 +96,6 @@ public abstract class Creature extends Actor {
         turnTowardsHome(100);
     }
 
-<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
-    public void turnTowardsHome() {
-        turnTowardsHome(100);
-    }
-
-=======
->>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
     public void turnTowardsHome(float likelihoodOfTurn) {
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
             turnTowards(ship);
@@ -314,11 +307,7 @@ public abstract class Creature extends Actor {
     public int getNextXCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED);
-<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
-        int x = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED + 2);
-=======
         int projectedX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED + 2);
->>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
 
         if (projectedX >= getWorld().getWidth()) {
             literalX = getWorld().getWidth() - 1;
@@ -332,11 +321,7 @@ public abstract class Creature extends Actor {
     public int getNextYCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED);
-<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
-        int y = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED + 2);
-=======
         int projectedY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED + 2);
->>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
 
         if (projectedY >= getWorld().getHeight()) {
             literalY = getWorld().getHeight() - 1;
