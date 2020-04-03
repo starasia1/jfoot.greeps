@@ -1,4 +1,4 @@
-package com.github.curriculeon.greeps;
+package com.github.git_leon.greeps;
 
 /**
  * A timer is a conter that automatically counts up as time goes on.

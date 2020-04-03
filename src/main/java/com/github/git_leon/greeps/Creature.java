@@ -1,4 +1,4 @@
-package com.github.curriculeon.greeps;
+package com.github.git_leon.greeps;
 
 import com.github.git_leon.RandomUtils;
 import greenfoot.Actor;
@@ -75,11 +75,34 @@ public abstract class Creature extends Actor {
         super.turnTowards(actor.getX(), actor.getY());
     }
 
+    public void turnOppositeDirection(int angle) {
+        setRotation(angle);
+        turn(180);
+    }
+
+    public void turnAwayFrom(Actor actor) {
+        turnAwayFrom(actor, 100);
+    }
+
+    public void turnAwayFrom(Actor actor, int likelihoodOfExecutingTurn) {
+        if (RandomUtils.createBoolean(likelihoodOfExecutingTurn)) {
+            turnTowards(actor);
+            turnOppositeDirection(getRotation());
+        }
+    }
+
 
     public void turnTowardsHome() {
         turnTowardsHome(100);
     }
 
+<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
+    public void turnTowardsHome() {
+        turnTowardsHome(100);
+    }
+
+=======
+>>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
     public void turnTowardsHome(float likelihoodOfTurn) {
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
             turnTowards(ship);
@@ -97,11 +120,11 @@ public abstract class Creature extends Actor {
      * Return true if we have found food at our current location.
      */
     public final boolean isAtTomatoes() {
-        return getSurroundTomatoPile() != null;
+        return getSurroundingTomatoPile() != null;
     }
 
 
-    public TomatoPile getSurroundTomatoPile() {
+    public TomatoPile getSurroundingTomatoPile() {
         return (TomatoPile) getOneIntersectingObject(TomatoPile.class);
     }
 
@@ -257,6 +280,9 @@ public abstract class Creature extends Actor {
             states[flagNo - 1] = val;
     }
 
+    public Spaceship getShip() {
+        return ship;
+    }
 
     /**
      * Move forward roughly in the current direction. Sometimes we get a
@@ -288,12 +314,16 @@ public abstract class Creature extends Actor {
     public int getNextXCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED);
+<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
         int x = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED + 2);
+=======
+        int projectedX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED + 2);
+>>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
 
-        if (x >= getWorld().getWidth()) {
+        if (projectedX >= getWorld().getWidth()) {
             literalX = getWorld().getWidth() - 1;
         }
-        if (x < 0) {
+        if (projectedX < 0) {
             literalX = 0;
         }
         return literalX;
@@ -302,12 +332,16 @@ public abstract class Creature extends Actor {
     public int getNextYCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED);
+<<<<<<< HEAD:src/main/java/com/github/curriculeon/greeps/Creature.java
         int y = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED + 2);
+=======
+        int projectedY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED + 2);
+>>>>>>> 98bca4721e3d94d299e0819cd10181688194c1b1:src/main/java/com/github/git_leon/greeps/Creature.java
 
-        if (y >= getWorld().getHeight()) {
+        if (projectedY >= getWorld().getHeight()) {
             literalY = getWorld().getHeight() - 1;
         }
-        if (y < 0) {
+        if (projectedY < 0) {
             literalY = 0;
         }
         return literalY;

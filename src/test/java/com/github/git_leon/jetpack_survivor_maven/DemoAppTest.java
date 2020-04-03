@@ -1,6 +1,6 @@
-package com.github.curriculeon.geeps;
+package com.github.git_leon.jetpack_survivor_maven;
 
-import com.github.curriculeon.greeps.Earth;
+import com.github.git_leon.greeps.Earth;
 import com.github.git_leon.jfoot.system.JFootApplication;
 import greenfoot.Greenfoot;
 import greenfoot.core.WorldHandler;
