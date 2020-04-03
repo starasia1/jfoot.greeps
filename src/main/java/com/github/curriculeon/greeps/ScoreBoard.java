@@ -1,4 +1,4 @@
-package com.github.git_leon.greeps;
+package com.github.curriculeon.greeps;
 
 import greenfoot.Actor;
 import greenfoot.Color;

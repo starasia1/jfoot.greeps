@@ -1,4 +1,4 @@
-package com.github.git_leon.greeps;
+package com.github.curriculeon.greeps;
 
 import com.github.git_leon.RandomUtils;
 import greenfoot.GreenfootImage;
