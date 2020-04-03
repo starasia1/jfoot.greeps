@@ -25,3 +25,7 @@ created.
         * `Actor` subclasses, such as `Greep` or `Paint`, cannot be instantiated. Greeps have no magic powers - they cannot create things out of nothing.
     7. No teleporting.
         * Methods from `Actor` that cheat normal movement (such as `setLocation`) may not be used.
+        
+        
+### Background
+* This application is built using a wrapper library, [Jfoot](https://github.com/Git-Leon/jfoot-api).
