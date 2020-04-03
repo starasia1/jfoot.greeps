@@ -23,13 +23,48 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
-        if (isCarryingTomato()) {
-            if (isAtShip()) {
-                dropTomato();
+        int minimumTurn = 0;
+        int maximumTurn = 180;
+        int turnLikelihood = 5;
+        SpriteSensorDecorator<TomatoPile> tomatoPileSensor = new SpriteSensorDecorator<>(this);
+        TomatoPile nearestPile = tomatoPileSensor.getNearest(TomatoPile.class);
+
+        // random chance of turning
+        turnRandomly(minimumTurn, maximumTurn, turnLikelihood * 2);
+
+        // always drop tomatoes at ship
+        if (isAtShip()) {
+            turnAwayFrom(getShip(), turnLikelihood);
+            dropTomato();
+        }
+
+        // always avoid obstacles
+        if (isAtWorldEdge() || isAtWater()) {
+            int obstacleTurnLikelihood = turnLikelihood * 100;
+            if (!isCarryingTomato()) {
+                if (isToLeft(nearestPile)) {
+                    turnRandomly(minimumTurn, -maximumTurn, obstacleTurnLikelihood);
+                } else {
+                    turnRandomly(minimumTurn, maximumTurn, obstacleTurnLikelihood);
+                }
             } else {
-                turnTowardsHome();
+                if (isToLeft(getShip())) {
+                    turnRandomly(minimumTurn, -maximumTurn, obstacleTurnLikelihood);
+                } else {
+                    turnRandomly(minimumTurn, maximumTurn, obstacleTurnLikelihood);
+                }
             }
         }
+
+        if (isWaitingForAssistance() || isWaitingToAssist()) {
+            turnTowards(getSurroundingTomatoPile());
+            loadTomato();
+        } else if (isCarryingTomato()) {
+            turnTowardsHome(turnLikelihood);
+        } else {
+            turnTowards(nearestPile, turnLikelihood);
+        }
+
         move();
     }
 
