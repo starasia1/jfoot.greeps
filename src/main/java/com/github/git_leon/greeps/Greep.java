@@ -1,4 +1,4 @@
-package com.github.curriculeon.greeps;
+package com.github.git_leon.greeps;
 
 import com.github.git_leon.RandomUtils;
 import greenfoot.GreenfootImage;
@@ -29,6 +29,7 @@ public class Greep extends Creature {
 
         // always drop tomatoes at ship
         if (isAtShip()) {
+            turnAwayFrom(getShip(), 15);
             dropTomato();
         }
 
@@ -46,7 +47,6 @@ public class Greep extends Creature {
         }
     }
 
-
     public Boolean isWaitingForAssistance() {
         return isAtTomatoes() && !isCarryingTomato();
     }
@@ -54,7 +54,7 @@ public class Greep extends Creature {
 
     public Boolean isWaitingToAssist() {
         if (isAtTomatoes()) {
-            for (Greep greep : getSurroundTomatoPile().getIntersectingObjects(Greep.class)) {
+            for (Greep greep : getSurroundingTomatoPile().getIntersectingObjects(Greep.class)) {
                 if (!greep.isCarryingTomato()) {
                     return true;
                 }
@@ -65,7 +65,7 @@ public class Greep extends Creature {
 
 
     public void waitForTomatoLoadingAssistance() {
-        turnTowards(getSurroundTomatoPile());
+        turnTowards(getSurroundingTomatoPile());
         move();
         loadTomato();
     }
