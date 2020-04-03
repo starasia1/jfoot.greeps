@@ -28,4 +28,4 @@ created.
         
         
 ### Background
-* This application is built using a wrapper library, [Jfoot](https://github.com/Git-Leon/jfoot-api).
+* This application is built using the [Jfoot](https://github.com/Git-Leon/jfoot-api) library.
