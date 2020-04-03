@@ -76,9 +76,10 @@ public abstract class Creature extends Actor {
     }
 
 
-    /**
-     *
-     */
+    public void turnTowardsHome() {
+        turnTowardsHome(100);
+    }
+
     public void turnTowardsHome(float likelihoodOfTurn) {
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
             turnTowards(ship);
@@ -287,7 +288,7 @@ public abstract class Creature extends Actor {
     public int getNextXCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED);
-        int x = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED+2);
+        int x = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED + 2);
 
         if (x >= getWorld().getWidth()) {
             literalX = getWorld().getWidth() - 1;
@@ -301,7 +302,7 @@ public abstract class Creature extends Actor {
     public int getNextYCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED);
-        int y = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED+2);
+        int y = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED + 2);
 
         if (y >= getWorld().getHeight()) {
             literalY = getWorld().getHeight() - 1;

@@ -24,25 +24,16 @@ public class Greep extends Creature {
 
     @Override
     protected void behave() {
-        // random chance of turning
-        turnRandomly();
-
-        // always drop tomatoes at ship
-        if (isAtShip()) {
-            dropTomato();
-        }
-
-        // always avoid obstacles
-        if (isAtWorldEdge() || isAtWater() || !canMove()) {
-            turnRandomDegrees();
-        }
-
-        if (isWaitingForAssistance() || isWaitingToAssist()) {
-            waitForTomatoLoadingAssistance();
-        } else if (isCarryingTomato()) {
-            returnToShip();
+        if (isCarryingTomato()) {
+            if (isAtShip()) {
+                dropTomato();
+            } else {
+                turnTowardsHome();
+                move();
+            }
         } else {
             move();
+            checkFood();
         }
     }
 
