@@ -31,13 +31,30 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>git-leon-utils</id>
+            <url>https://packagecloud.io/git-leon/utils/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>com.github.git-leon</groupId>
             <artifactId>jfoot-api</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.git-leon</groupId>
+            <artifactId>randomutils</artifactId>
+            <version>1.2</version>
         </dependency>
 
         <dependency>

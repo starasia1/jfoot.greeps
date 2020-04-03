@@ -1,6 +1,8 @@
 package com.github.git_leon.greeps;
 
+import com.github.git_leon.jfoot.sprite.Sprite;
 import com.github.git_leon.jfoot.system.resources.JFootImage;
+import com.github.git_leon.jfoot.world.AbstractJFootWorld;
 import greenfoot.Color;
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
@@ -14,7 +16,7 @@ import greenfoot.World;
  * @author Michael Kolling
  * @version 1.0
  */
-public class Earth extends World {
+public class Earth extends AbstractJFootWorld {
     public static final int RESOLUTION = 1;
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
@@ -26,14 +28,33 @@ public class Earth extends World {
     private int currentMap;
 
     private int[][][] mapData = {
-            {{480, 100, 0}, {40, 721, 532}, {12, 400, 560}, {40, 615, 400},    // map 1
-                    {40, 642, 192}, {16, 128, 113}, {30, 400, 40}},
+            { // map 1
+                    {480, 100, 0},
+                    {40, 721, 532},
+                    {12, 400, 560},
+                    {40, 615, 400},
+                    {40, 642, 192},
+                    {16, 128, 113},
+                    {30, 400, 40}
+            },
 
-            {{496, 709, 0}, {10, 322, 422}, {40, 700, 241}, {40, 681, 49},     // map 2
-                    {10, 317, 54}, {50, 90, 174}, {40, 60, 339}},
+            { // map 2
+                    {496, 709, 0},
+                    {10, 322, 422},
+                    {40, 700, 241},
+                    {40, 681, 49},
+                    {10, 317, 54},
+                    {50, 90, 174},
+                    {40, 60, 339}
+            },
 
-            {{272, 394, 0}, {10, 39, 30}, {30, 71, 476}, {50, 398, 520},       // map 3
-                    {40, 655, 492}},
+            { // map 3
+                    {272, 394, 0},
+                    {10, 39, 30},
+                    {30, 71, 476},
+                    {50, 398, 520},
+                    {40, 655, 492}
+            },
     };
 
     private int[] scores;
@@ -53,8 +74,12 @@ public class Earth extends World {
      * (Water is defined as a predominantly blueish color.)
      */
     public boolean isWater(int x, int y) {
-        Color col = map.getColorAt(x, y);
-        return col.getBlue() > (col.getRed() * 2);
+        try {
+            Color col = map.getColorAt(x, y);
+            return col.getBlue() > (col.getRed() * 2);
+        } catch (IndexOutOfBoundsException ioobe) {
+            return false;
+        }
     }
 
     /**
@@ -81,7 +106,7 @@ public class Earth extends World {
         int[][] thisMap = mapData[mapNo];
         for (int i = 1; i < thisMap.length; i++) {
             int[] data = thisMap[i];
-            addObject(new Tomato(data[0]), data[1], data[2]);
+            addObject(new TomatoPile(data[0]), data[1], data[2]);
         }
         int[] shipData = thisMap[0];
         ship = new Spaceship(shipData[0]);
@@ -125,5 +150,10 @@ public class Earth extends World {
         for (int i = 0; i < time; i++) {
             Greenfoot.delay(1);
         }
+    }
+
+    @Override
+    protected void init() {
+
     }
 }

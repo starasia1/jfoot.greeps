@@ -39,6 +39,8 @@ public class Spaceship extends Actor {
             }
         } else {
             move();
+            move();
+            move();
         }
     }
 

@@ -51,7 +51,7 @@ public class Timer extends Counter {
      * Return true if there are no tomatoes left in this map.
      */
     private boolean allTomatoesGone() {
-        return getWorld().getObjects(Tomato.class).isEmpty();
+        return getWorld().getObjects(TomatoPile.class).isEmpty();
     }
 
     /**

@@ -1,9 +1,12 @@
 package com.github.git_leon.greeps;
 
+import com.github.git_leon.jfoot.sprite.Sprite;
 import greenfoot.Actor;
 import greenfoot.Color;
 import greenfoot.GreenfootImage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,7 +15,7 @@ import java.util.Random;
  * @author Michael Kolling
  * @version 1.0.1
  */
-public class Tomato extends Actor {
+public class TomatoPile extends Actor {
     private static Random randomizer = new Random();
 
     private static final int SIZE = 30;
@@ -26,9 +29,18 @@ public class Tomato extends Actor {
     /**
      * Create a pile of a given number of tomatoes.
      */
-    public Tomato(int tomatoes) {
+    public TomatoPile(int tomatoes) {
         this.tomatoes = tomatoes;
         updateImage();
+    }
+
+    @Override
+    public <A> List<A> getIntersectingObjects(Class<A> cls) {
+        List<A> result = super.getIntersectingObjects(cls);
+        if(result == null) {
+            return new ArrayList<>();
+        }
+        return result;
     }
 
     /**

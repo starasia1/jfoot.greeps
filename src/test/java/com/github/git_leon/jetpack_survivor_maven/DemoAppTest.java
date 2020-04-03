@@ -9,7 +9,7 @@ import org.junit.Test;
 public class DemoAppTest {
     @Test
     public void test() {
-        test(3, 12000L);
+        test(3, 999999L);
     }
 
     private void test(Integer numberOfRounds, Long durationOfRoundsInMilliseconds) {
@@ -18,8 +18,9 @@ public class DemoAppTest {
 
     private void test(Integer numberOfRounds, Long durationOfRoundsInMilliseconds, Integer simulationSpeed) {
         try {
-            Long timeToEvaluateResultsInMilliseconds = 1500L;
+            Long timeToEvaluateResultsInMilliseconds = 5000L;
             Long totalSimulationTime = (numberOfRounds * durationOfRoundsInMilliseconds) + timeToEvaluateResultsInMilliseconds;
+            totalSimulationTime *=  50 / simulationSpeed ;
             new JFootApplication().run();
             Greenfoot.setWorld(new Earth());
             Greenfoot.setSpeed(simulationSpeed);

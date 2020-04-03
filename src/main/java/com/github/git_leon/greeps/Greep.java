@@ -1,5 +1,10 @@
 package com.github.git_leon.greeps;
 
+import com.github.git_leon.RandomUtils;
+import greenfoot.GreenfootImage;
+
+import java.util.List;
+
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
  *
@@ -7,55 +12,114 @@ package com.github.git_leon.greeps;
  * @version 0.1
  */
 public class Greep extends Creature {
-    // Remember: you cannot extend the Greep's memory. So:
-    // no additional fields (other than final fields) allowed in this class!
-
     /**
-     * Default constructor for testing purposes.
-     */
-    public Greep() {
-        this(null);
-    }
-
-
-    /**
-     * Create a Greep with its home space ship.
+     * Create a creature at its ship.
+     *
+     * @param ship
      */
     public Greep(Spaceship ship) {
         super(ship);
-        setImage(new StringBuilder()
-                .append(System.getProperty("user.dir"))
-                .append("/src/main/resources/images/")
-                .append("greep.png")
-                .toString());
+        setImage(getCurrentImage());
+    }
+
+    @Override
+    protected void behave() {
+        // random chance of turning
+        turnRandomly();
+
+        // always drop tomatoes at ship
+        if (isAtShip()) {
+            dropTomato();
+        }
+
+        // always avoid obstacles
+        if (isAtWorldEdge() || isAtWater() || !canMove()) {
+            turnRandomDegrees();
+        }
+
+        if (isWaitingForAssistance() || isWaitingToAssist()) {
+            waitForTomatoLoadingAssistance();
+        } else if (isCarryingTomato()) {
+            returnToShip();
+        } else {
+            move();
+        }
     }
 
 
-    /**
-     * Do what a greep's gotta do.
-     */
-    public void act() {
-        super.act();   // do not delete! leave as first statement in act().
-        if (carryingTomato()) {
-            if (atShip()) {
-                dropTomato();
-            } else {
-                turnHome();
-                move();
+    public Boolean isWaitingForAssistance() {
+        return isAtTomatoes() && !isCarryingTomato();
+    }
+
+
+    public Boolean isWaitingToAssist() {
+        if (isAtTomatoes()) {
+            for (Greep greep : getSurroundTomatoPile().getIntersectingObjects(Greep.class)) {
+                if (!greep.isCarryingTomato()) {
+                    return true;
+                }
             }
-        } else {
-            move();
-            checkFood();
+        }
+        return false;
+    }
+
+
+    public void waitForTomatoLoadingAssistance() {
+        turnTowards(getSurroundTomatoPile());
+        move();
+        loadTomato();
+    }
+
+
+    public Boolean isReturningToShip() {
+        return isCarryingTomato();
+    }
+
+
+    public void returnToShip() {
+        turnTowardsHome(3);
+        move();
+    }
+
+
+    public Boolean shouldSeekTomatoPile() {
+        return !isCarryingTomato();
+    }
+
+
+    public void seekTomatoPile() {
+        move();
+    }
+
+
+    public void turnRandomDegrees() {
+        turnRandomDegrees(15, 90);
+    }
+
+
+    public void turnRandomDegrees(int minimumTurn, int maximumTurn) {
+        turn(RandomUtils.createInteger(minimumTurn, maximumTurn));
+    }
+
+
+    public void turnRandomly() {
+        turnRandomly(-15, -90, 0);
+    }
+
+
+    public void turnRandomly(int minimumTurn, int maximumTurn, float likelihoodOfTurn) {
+        if (RandomUtils.createBoolean(likelihoodOfTurn)) {
+            turnRandomDegrees(minimumTurn, maximumTurn);
         }
     }
 
     /**
      * Is there any food here where we are? If so, try to load some!
      */
+
     public void checkFood() {
         // check whether there's a tomato pile here
-        Tomato tomatoes = (Tomato) getOneIntersectingObject(Tomato.class);
-        if (tomatoes != null) {
+        if (isAtTomatoes()) {
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
@@ -64,29 +128,27 @@ public class Greep extends Creature {
 
 
     /**
-     * This method specifies the name of the author (for display on the result board).
-     */
-    public static String getAuthorName() {
-        return "Anonymous";  // write your name here!
-    }
-
-
-    /**
      * This method specifies the image we want displayed at any time. (No need
      * to change this for the competition.)
      */
+
     public String getCurrentImage() {
-        if (carryingTomato())
-            return new StringBuilder()
-                    .append(System.getProperty("user.dir"))
-                    .append("/src/main/resources/images/")
-                    .append("greep-with-food.png")
-                    .toString();
+        if (isCarryingTomato())
+            return "greep-with-food.png";
         else
-            return new StringBuilder()
-                    .append(System.getProperty("user.dir"))
-                    .append("/src/main/resources/images/")
-                    .append("greep.png")
-                    .toString();
+            return "greep.png";
+    }
+
+    /**
+     * Create a Greep with its home space ship.
+     */
+
+    public static String getAuthorName() {
+        return "Anonymous";
+    }
+
+
+    public List<GreenfootImage> getImageList() {
+        return null;
     }
 }
