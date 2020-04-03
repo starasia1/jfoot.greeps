@@ -1,9 +1,8 @@
 package com.github.curriculeon.greeps;
 
 import com.github.git_leon.RandomUtils;
-import greenfoot.GreenfootImage;
-
-import java.util.List;
+import com.github.git_leon.jfoot.sprite.SpriteSensorDecorator;
+import greenfoot.Actor;
 
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
@@ -32,6 +31,28 @@ public class Greep extends Creature {
             }
         }
         move();
+    }
+
+    private Boolean isToLeft(Actor actor) {
+        int currentRotation = getRotation();
+        turnTowards(actor);
+        int relativeAngle = getRotation();
+        if (relativeAngle > 180)
+            return true;
+        setRotation(currentRotation);
+        return false;
+    }
+
+    private GreepSpit getIntersectingSpit() {
+        return (GreepSpit) getOneIntersectingObject(GreepSpit.class);
+    }
+
+    private boolean isAtSpit(String colorName) {
+        GreepSpit potentialSpit = (GreepSpit) getOneIntersectingObject(GreepSpit.class);
+        if (potentialSpit != null) {
+            return potentialSpit.getColor().equalsIgnoreCase(colorName);
+        }
+        return false;
     }
 
     public Boolean isWaitingForAssistance() {
@@ -89,12 +110,13 @@ public class Greep extends Creature {
     }
 
 
-    public void turnRandomly() {
-        turnRandomly(-15, -90, 0);
-    }
-
-
     public void turnRandomly(int minimumTurn, int maximumTurn, float likelihoodOfTurn) {
+        if (minimumTurn > maximumTurn) {
+            Integer temp;
+            temp = maximumTurn;
+            maximumTurn = minimumTurn;
+            minimumTurn = temp;
+        }
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
             turnRandomDegrees(minimumTurn, maximumTurn);
         }

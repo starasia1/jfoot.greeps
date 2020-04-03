@@ -1,5 +1,6 @@
 package com.github.curriculeon.greeps;
 
+import com.github.git_leon.jfoot.sprite.SpriteSensorDecorator;
 import greenfoot.Actor;
 import greenfoot.Color;
 import greenfoot.GreenfootImage;
@@ -11,7 +12,7 @@ import greenfoot.GreenfootImage;
  * @author Michael Kolling
  * @version 1.0.1
  */
-public class Paint extends Actor {
+public class GreepSpit extends Actor {
     private final static int MAX_INTENSITY = 255;
     private final static int SIZE = 20;
     private int intensity;
@@ -22,7 +23,7 @@ public class Paint extends Actor {
     /**
      * Create some paint, of default color.
      */
-    public Paint() {
+    public GreepSpit() {
         this("");
     }
 
@@ -30,7 +31,7 @@ public class Paint extends Actor {
      * Create some paint, of specific fixed colors. Legal color values are:
      * "red", "orange", and "purple".
      */
-    public Paint(String color) {
+    public GreepSpit(String color) {
         name = color;
         if (color.equals("red")) {
             red = 232;

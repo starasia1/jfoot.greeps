@@ -72,7 +72,9 @@ public abstract class Creature extends Actor {
      * @param actor - Actor to turn towards
      */
     public void turnTowards(Actor actor) {
-        super.turnTowards(actor.getX(), actor.getY());
+        if (actor != null) {
+            super.turnTowards(actor.getX(), actor.getY());
+        }
     }
 
     public void turnOppositeDirection(int angle) {
@@ -97,8 +99,13 @@ public abstract class Creature extends Actor {
     }
 
     public void turnTowardsHome(float likelihoodOfTurn) {
+        turnTowards(ship, likelihoodOfTurn);
+    }
+
+
+    public void turnTowards(Actor actor, float likelihoodOfTurn) {
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
-            turnTowards(ship);
+            turnTowards(actor);
         }
     }
 
@@ -145,9 +152,9 @@ public abstract class Creature extends Actor {
      * Check whether we can see paint of a given color where we are sitting.
      */
     public boolean isSeeingPaint(String color) {
-        List paintDrops = getIntersectingObjects(Paint.class);
+        List paintDrops = getIntersectingObjects(GreepSpit.class);
         for (Object obj : paintDrops) {
-            if (((Paint) obj).getColor().equals(color)) {
+            if (((GreepSpit) obj).getColor().equals(color)) {
                 return true;
             }
         }
@@ -235,7 +242,7 @@ public abstract class Creature extends Actor {
      */
     public void spit(String color) {
         if (timeToSpit == 0) {
-            Paint paint = new Paint(color);
+            GreepSpit paint = new GreepSpit(color);
             getWorld().addObject(paint, getX(), getY());
             timeToSpit = TIME_TO_SPIT + Greenfoot.getRandomNumber(10);
         }
