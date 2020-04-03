@@ -133,9 +133,4 @@ public class Greep extends Creature {
     public static String getAuthorName() {
         return "Anonymous";
     }
-
-
-    public List<GreenfootImage> getImageList() {
-        return null;
-    }
 }
