@@ -32,10 +32,19 @@ public abstract class Creature extends Actor {
         setRotation(RandomUtils.createInteger(0, 360));
     }
 
+    /**
+     * @return string-representation of the current image of this `Creature` instance
+     */
     abstract public String getCurrentImage();
 
+    /**
+     * Defines what a `Creature` will do
+     */
     abstract protected void behave();
 
+    /**
+     * @param imageName path of image to set this `Creature` instance to
+     */
     @Override
     public final void setImage(String imageName) {
         super.setImage(new StringBuilder()
@@ -77,32 +86,11 @@ public abstract class Creature extends Actor {
         }
     }
 
-    public void turnOppositeDirection(int angle) {
-        setRotation(angle);
-        turn(180);
-    }
 
-    public void turnAwayFrom(Actor actor) {
-        turnAwayFrom(actor, 100);
-    }
-
-    public void turnAwayFrom(Actor actor, int likelihoodOfExecutingTurn) {
-        if (RandomUtils.createBoolean(likelihoodOfExecutingTurn)) {
-            turnTowards(actor);
-            turnOppositeDirection(getRotation());
-        }
-    }
-
-
-    public void turnTowardsHome() {
-        turnTowardsHome(100);
-    }
-
-    public void turnTowardsHome(float likelihoodOfTurn) {
-        turnTowards(ship, likelihoodOfTurn);
-    }
-
-
+    /**
+     * @param actor            the actor to turn towards
+     * @param likelihoodOfTurn the likelihood of successfully turning toward the specified actor
+     */
     public void turnTowards(Actor actor, float likelihoodOfTurn) {
         if (RandomUtils.createBoolean(likelihoodOfTurn)) {
             turnTowards(actor);
@@ -110,34 +98,79 @@ public abstract class Creature extends Actor {
     }
 
     /**
-     * True if we are at our space ship.
+     * turn towards the ship
+     */
+    public void turnTowardsHome() {
+        turnTowardsHome(100);
+    }
+
+    /**
+     * turn towards the ship with some likelihood
+     *
+     * @param likelihoodOfTurn the likelihood of successfully turning toward the ship
+     */
+    public void turnTowardsHome(float likelihoodOfTurn) {
+        turnTowards(ship, likelihoodOfTurn);
+    }
+
+    /**
+     * @param angle the angle to turn away from
+     */
+    public void turnOppositeDirection(int angle) {
+        setRotation(angle);
+        turn(180);
+    }
+
+    /**
+     * @param actor the actor to turn away from
+     */
+    public void turnAwayFrom(Actor actor) {
+        turnAwayFrom(actor, 100);
+    }
+
+    /**
+     * @param actor                     the actor to turn away from
+     * @param likelihoodOfExecutingTurn the likelihood of executing the turn
+     */
+    public void turnAwayFrom(Actor actor, int likelihoodOfExecutingTurn) {
+        if (RandomUtils.createBoolean(likelihoodOfExecutingTurn)) {
+            turnTowards(actor);
+            turnOppositeDirection(getRotation());
+        }
+    }
+
+    /**
+     * @return true if we are at our space ship.
      */
     public final boolean isAtShip() {
         return getOneIntersectingObject(Spaceship.class) != null;
     }
 
     /**
-     * Return true if we have found food at our current location.
+     * @return true if we have found food at our current location.
      */
     public final boolean isAtTomatoes() {
         return getSurroundingTomatoPile() != null;
     }
 
 
+    /**
+     * @return the instance of the tomato pile that this `Creature` instance is currently intersecting; return null if no tomato pile can be found
+     */
     public TomatoPile getSurroundingTomatoPile() {
         return (TomatoPile) getOneIntersectingObject(TomatoPile.class);
     }
 
 
     /**
-     * Return true if we have just seen water in front of us.
+     * @return true if we have just seen water in front of us.
      */
     public final boolean isAtWater() {
         return ((Earth) getWorld()).isWater(getNextXCoordinate(), getNextYCoordinate());
     }
 
     /**
-     * Test if we are close to one of the edges of the world. Return true if we are.
+     * @return true if we are within 3 cells of the world's edge
      */
     public boolean isAtWorldEdge() {
         if (getX() < 3 || getX() > getWorld().getWidth() - 3)
@@ -280,6 +313,9 @@ public abstract class Creature extends Actor {
             states[flagNo - 1] = val;
     }
 
+    /**
+     * @return the Spaceship to return tomato piles to
+     */
     public Spaceship getShip() {
         return ship;
     }
@@ -307,10 +343,19 @@ public abstract class Creature extends Actor {
         moved = true;
     }
 
+    /**
+     * @return true if the next coordinate is not equal to the current coordinate
+     */
     public Boolean canMove() {
-        return getNextXCoordinate() != getX() && getNextYCoordinate() != getY();
+        boolean xCoordinateWillBeTheSame = getNextXCoordinate() == getX();
+        boolean yCoordinateWillBeTheSame = getNextYCoordinate() == getY();
+        boolean positionWillBeTheSame = xCoordinateWillBeTheSame && yCoordinateWillBeTheSame;
+        return !positionWillBeTheSame;
     }
 
+    /**
+     * @return return the `Y` coordinates of the next location to move into
+     */
     public int getNextXCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalX = (int) Math.round(getX() + Math.cos(angle) * WALKING_SPEED);
@@ -325,6 +370,9 @@ public abstract class Creature extends Actor {
         return literalX;
     }
 
+    /**
+     * @return return the `X` coordinates of the next location to move into
+     */
     public int getNextYCoordinate() {
         double angle = Math.toRadians(getRotation());
         int literalY = (int) Math.round(getY() + Math.sin(angle) * WALKING_SPEED);
