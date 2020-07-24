@@ -9,10 +9,10 @@
     * You may **ONLY CHANGE THE GREEP** class.
     * You may **not** change any other class.
 * **Getting oriented**
-    * Please view the [javadocs](./javadocs/index.html) for this project to get better acquainted with the object orientation
-        * the [Creature](./javadocs/com/github/curriculeon/greeps/Creature.html) class is the abstract superclass of the `Greep` class.
-        * the [Greep](./javadocs/com/github/curriculeon/greeps/Greep.html) is a concrete subclass of the `Creature` class.
-        * the [GreepSpit](./javadocs/com/github/curriculeon/greeps/GreepSpit.html) is a _composite child_ of `Greep`. It is the permissible only communication mechanism by `Greep`s.
+    * Please view the [javadocs](https://curriculeon.github.io/jfoot.greeps/javadocs/index.html) for this project to get better acquainted with the object orientation
+        * the [Creature](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/Creature.html) class is the abstract superclass of the `Greep` class.
+        * the [Greep](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/Greep.html) is a concrete subclass of the `Creature` class.
+        * the [GreepSpit](https://curriculeon.github.io/jfoot.greeps/javadocs/com/github/curriculeon/greeps/GreepSpit.html) is a _composite child_ of `Greep`. It is the permissible only communication mechanism by `Greep`s.
 * **Development Constraints**  
     1. Only change the class `Greep`. No other classes may be modified or 
 created.
