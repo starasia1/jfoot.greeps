@@ -5,7 +5,7 @@
 * **Objective**
     * Modify the `Greep` class to collect `Tomato` objects and return them to the `Spaceship` while avoiding `Water` and obstacles.
 * **Description**
-    * Please view the [javadocs](./javadocs/index.html) for this project to get better acquainted with the object orientation
+    * Please view the [javadocs](https://curriculeon.github.io/jfoot.greeps/javadocs/index.html) for this project to get better acquainted with the object orientation
     * Your task is to program the Greeps to collect as many `Tomato` as possible.
     * You may **ONLY CHANGE THE GREEP** class.
     * You may **not** change any other class.
