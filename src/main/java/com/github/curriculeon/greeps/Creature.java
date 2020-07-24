@@ -354,7 +354,7 @@ public abstract class Creature extends Actor {
     }
 
     /**
-     * @return return the `Y` coordinates of the next location to move into
+     * @return return the `Y` coordinates of the   location to move into
      */
     public int getNextXCoordinate() {
         double angle = Math.toRadians(getRotation());
